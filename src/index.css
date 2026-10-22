@@ -1,0 +1,308 @@
+/* ==========================================================================
+   Mercury Infotech UK - Premium Executive Brand Design System
+   Strictly Mercury Infotech Logo Palette (#1358C1, #F02814 & Clean Surfaces)
+   ========================================================================== */
+
+:root {
+  /* Official Mercury Infotech Logo Colors */
+  --brand-blue: #1358C1;
+  --brand-blue-hover: #0D4396;
+  --brand-blue-subtle: #EDF3FC;
+  --brand-blue-border: #BFD5F5;
+  --brand-blue-glow: rgba(19, 88, 193, 0.12);
+
+  --brand-red: #F02814;
+  --brand-red-hover: #D01F0D;
+  --brand-red-subtle: #FDF1EF;
+  --brand-red-border: #F9C3BE;
+  --brand-red-glow: rgba(240, 40, 20, 0.12);
+
+  /* Clean White Surfaces */
+  --bg-base: #FFFFFF;
+  --bg-subtle: #F9FAFB;
+  --bg-card: #FFFFFF;
+  --bg-modal-overlay: rgba(17, 24, 39, 0.65);
+
+  /* High-Contrast Corporate Typography */
+  --text-heading: #111827;
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+  --text-light: #9CA3AF;
+
+  /* Borders & Dividers */
+  --border-hairline: #E5E7EB;
+  --border-card: #E5E7EB;
+  --border-hover: #1358C1;
+
+  /* Premium Multi-Layer Shadows */
+  --shadow-subtle: 0 1px 3px rgba(17, 24, 39, 0.04), 0 1px 2px rgba(17, 24, 39, 0.02);
+  --shadow-card: 0 4px 20px -2px rgba(17, 24, 39, 0.06), 0 0 0 1px rgba(19, 88, 193, 0.08);
+  --shadow-elevation: 0 16px 40px -8px rgba(17, 24, 39, 0.08), 0 0 1px rgba(17, 24, 39, 0.1);
+  --shadow-hover: 0 20px 48px -10px rgba(19, 88, 193, 0.18), 0 0 0 1.5px var(--brand-blue);
+  --shadow-modal: 0 32px 80px -16px rgba(17, 24, 39, 0.28), 0 0 0 1px rgba(17, 24, 39, 0.08);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+
+  /* Sizing & Geometry */
+  --max-width: 1240px;
+  --header-height: 90px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Timings */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.2s var(--ease-smooth);
+  --transition-normal: 0.3s var(--ease-smooth);
+  --transition-slow: 0.5s var(--ease-smooth);
+}
+
+@media (max-width: 960px) {
+  :root {
+    --header-height: 72px;
+  }
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-base);
+  /* Modern High-End Digital Blueprint Grid with Subtle Brand Depth */
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(19, 88, 193, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(240, 40, 20, 0.025) 0%, transparent 50%),
+    radial-gradient(rgba(19, 88, 193, 0.065) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F9FAFB;
+}
+::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-blue);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(0.85rem, 3.5vw, 2.5rem);
+  padding-right: clamp(0.85rem, 3.5vw, 2.5rem);
+}
+
+/* Section Common: Snug, energetic modern spacing */
+.section {
+  padding-top: clamp(1.35rem, 2.75vw, 2.25rem);
+  padding-bottom: clamp(1.35rem, 2.75vw, 2.25rem);
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(0.85rem, 1.85vw, 1.35rem) auto;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-blue);
+  background: var(--brand-blue-subtle);
+  border: 1px solid var(--brand-blue-border);
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.95rem;
+  box-shadow: 0 2px 8px rgba(19, 88, 193, 0.06);
+}
+
+.section-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-red);
+  box-shadow: 0 0 6px var(--brand-red);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.2vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-heading);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.95rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.section-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+
+/* Gradient Shimmer Text using Logo Palette */
+.gradient-text {
+  color: var(--brand-blue);
+  background: linear-gradient(135deg, var(--brand-blue) 0%, #2069DA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Premium Buttons using Logo Colors */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.75rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+  outline: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-hover) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(19, 88, 193, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(19, 88, 193, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  color: var(--text-heading);
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--shadow-subtle);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-subtle);
+  border-color: var(--brand-blue-border);
+  color: var(--brand-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: #FFFFFF;
+  color: var(--brand-blue);
+  border: 1px solid var(--brand-blue-border);
+}
+
+.btn-outline:hover {
+  background: var(--brand-blue-subtle);
+  border-color: var(--brand-blue);
+  transform: translateY(-2px);
+}
+
+/* Ambient Subtle Background Orbs */
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.glow-blue {
+  background: radial-gradient(circle, rgba(19, 88, 193, 0.08) 0%, transparent 70%);
+}
+
+.glow-red {
+  background: radial-gradient(circle, rgba(240, 40, 20, 0.04) 0%, transparent 70%);
+}
+
+/* Micro Animations */
+@keyframes ringPulse {
+  0% { transform: scale(0.85); opacity: 0.9; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

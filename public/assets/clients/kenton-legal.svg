@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60" fill="none">
+  <path d="M25 15V45M15 19H35M18 20L12 32H24L18 20ZM32 20L26 32H38L32 20ZM12 45H38" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="52" y="30" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="16" font-weight="700" fill="#0F172A" letter-spacing="1.2">KENTON &amp; HARROW</text>
+  <text x="53" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600" fill="#B45309" letter-spacing="2.5">LEGAL CHAMBERS LONDON</text>
+</svg>

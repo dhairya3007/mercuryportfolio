@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60" fill="none">
+  <path d="M28 12L42 26L28 48L14 26L28 12Z" stroke="#D97706" stroke-width="2"/>
+  <path d="M28 20L36 28L28 40L20 28L28 20Z" fill="#D97706" fill-opacity="0.2"/>
+  <text x="56" y="31" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="800" fill="#0F172A" letter-spacing="2">ELEVATE</text>
+  <text x="57" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600" fill="#D97706" letter-spacing="3">BRAND STUDIO &amp; CO.</text>
+</svg>

@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Portfolio Category Filters - Bulletproof Responsive Scroller
+   Strictly Mercury Infotech Brand Palette (#1358C1, #F02814 & Crisp Surfaces)
+   Invisible Scrollbar Across All Browsers & Operating Systems
+   ========================================================================== */
+
+/* Outer wrapper */
+.portfolio-filters-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto clamp(1.25rem, 2.5vw, 2rem) auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* Horizontal Scroll Container */
+.portfolio-filters-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+  padding: 0.35rem 0.5rem 0.75rem 0.5rem;
+  cursor: grab;
+  
+  /* CRITICAL: Default to flex-start so the first button is NEVER clipped off-screen */
+  justify-content: flex-start;
+
+  /* HIDE SCROLLBAR IN ALL BROWSERS (Firefox & IE/Edge) */
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.portfolio-filters-container:active {
+  cursor: grabbing;
+}
+
+/* HIDE SCROLLBAR IN CHROME, SAFARI, OPERA, ANDROID & IOS */
+.portfolio-filters-container::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  background: transparent !important;
+  -webkit-appearance: none !important;
+}
+
+/* Center categories on wide desktop displays where all pills fit without overflow */
+@media (min-width: 1200px) {
+  .portfolio-filters-container {
+    justify-content: center;
+  }
+}
+
+/* Individual Filter Pill Chips */
+.filter-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.15rem;
+  font-family: var(--font-sans);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: #FFFFFF;
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04);
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.filter-btn:hover {
+  color: var(--brand-blue);
+  border-color: var(--brand-blue-border);
+  box-shadow: 0 4px 14px rgba(19, 88, 193, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Active State: Clean Mercury Blue Gradient */
+.filter-btn.is-active {
+  background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-hover) 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(19, 88, 193, 0.35);
+  transform: translateY(-1px);
+}
+
+.filter-btn:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+}
+
+/* Numeric Project Count Badge */
+.filter-count {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.12rem 0.48rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover .filter-count {
+  color: var(--brand-blue);
+  border-color: var(--brand-blue-border);
+}
+
+.filter-btn.is-active .filter-count {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   Responsive View Breakpoint
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .portfolio-filters-wrapper {
+    margin-bottom: 1.25rem;
+  }
+
+  .portfolio-filters-container {
+    gap: 0.4rem;
+    padding: 0.25rem 0.25rem 0.65rem 0.25rem;
+  }
+
+  .filter-btn {
+    padding: 0.48rem 0.85rem;
+    font-size: 0.78rem;
+    gap: 0.45rem;
+  }
+
+  .filter-count {
+    font-size: 0.64rem;
+    padding: 0.08rem 0.4rem;
+  }
+}

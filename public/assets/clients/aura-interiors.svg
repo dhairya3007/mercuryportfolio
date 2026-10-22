@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60" fill="none">
+  <path d="M18 42V26C18 18.268 24.268 12 32 12C39.732 12 46 18.268 46 26V42" stroke="#78716C" stroke-width="2"/>
+  <circle cx="32" cy="27" r="4" fill="#78716C"/>
+  <text x="56" y="32" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="18" font-weight="700" fill="#0F172A" letter-spacing="3">AURA</text>
+  <text x="122" y="32" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="400" fill="#44403C" letter-spacing="2">LIVING</text>
+  <text x="57" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8.5" font-weight="600" fill="#78716C" letter-spacing="3">INTERIOR ARCHITECTURE</text>
+</svg>

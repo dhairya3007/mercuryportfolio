@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60" fill="none">
+  <circle cx="28" cy="30" r="15" fill="#7C3AED" fill-opacity="0.12" stroke="#7C3AED" stroke-width="2"/>
+  <path d="M22 25C24 23 28 23 30 25M20 28C23 25 29 25 32 28M18 31C22 27 30 27 34 31" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+  <rect x="25" y="32" width="6" height="5" rx="1" fill="#059669"/>
+  <text x="56" y="31" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="19" font-weight="800" fill="#0F172A" letter-spacing="1">NOVA<tspan fill="#7C3AED">PAY</tspan></text>
+  <text x="57" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#059669" letter-spacing="2">SMART NFC &amp; TERMINALS</text>
+</svg>

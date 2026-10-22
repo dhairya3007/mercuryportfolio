@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60" fill="none">
+  <path d="M15 45L30 15L45 45L35 45L30 33L25 45H15Z" fill="#0284C7"/>
+  <path d="M28 27L38 45H48L33 15H28V27Z" fill="#2563EB" opacity="0.8"/>
+  <circle cx="30" cy="12" r="3" fill="#0284C7"/>
+  <text x="60" y="32" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="19" font-weight="800" fill="#0F172A" letter-spacing="1.5">APEX</text>
+  <text x="122" y="32" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="19" font-weight="500" fill="#475569" letter-spacing="1">LOGISTICS</text>
+  <text x="61" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#0284C7" letter-spacing="3">UK FLEET SERVICES</text>
+</svg>

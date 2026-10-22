@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60" fill="none">
+  <path d="M28 44C28 44 22 34 22 26C22 20.4772 26.4772 16 32 16C37.5228 16 42 20.4772 42 26C42 34 32 44 32 44" fill="#059669" fill-opacity="0.15" stroke="#059669" stroke-width="2"/>
+  <path d="M28 36C28 26 34 22 34 22" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
+  <text x="56" y="31" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="800" fill="#0F172A" letter-spacing="1">GREEN<tspan fill="#059669">SPROUT</tspan></text>
+  <text x="57" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#047857" letter-spacing="2">ECO GOODS &amp; CO.</text>
+</svg>
