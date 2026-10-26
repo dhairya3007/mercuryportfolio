@@ -173,33 +173,47 @@ export default function ClientCard({ project, onOpenModal, index }) {
 
           {/* Details Scroll Area */}
           <div className="back-scroll-area">
-            {/* Overview */}
-            <p className="back-overview-para">{project.overview}</p>
+            {/* Overview / Description */}
+            <p className="back-overview-para">
+              {project.overview || project.shortDescription || ''}
+            </p>
 
-            {/* Deliverables */}
-            <div className="back-spec-group">
-              <h6 className="spec-group-title">Key Deliverables</h6>
-              <ul className="spec-list">
-                {project.features.slice(0, 3).map((feat, idx) => (
-                  <li key={idx} className="spec-list-item">
-                    <CheckCircle2 size={13} className="spec-check" />
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Deployed Tech Stack */}
-            <div className="back-spec-group">
-              <h6 className="spec-group-title">Architecture &amp; Stack</h6>
-              <div className="spec-tags-wrap">
-                {project.technologies.slice(0, 4).map((tech, idx) => (
-                  <span key={idx} className="tech-tag-pill">
-                    {tech}
-                  </span>
-                ))}
+            {/* Dynamic Metric Highlight if present */}
+            {Array.isArray(project.metrics) && project.metrics.length > 0 && (
+              <div className="back-metric-badge">
+                <span className="back-metric-val">{project.metrics[0].value || project.metrics[0].val}</span>
+                <span className="back-metric-lbl">{project.metrics[0].label || project.metrics[0].name}</span>
               </div>
-            </div>
+            )}
+
+            {/* Deliverables / Features (Safely guarded) */}
+            {(project.features || project.deliverables || project.highlights) && (project.features || project.deliverables || project.highlights).length > 0 && (
+              <div className="back-spec-group">
+                <h6 className="spec-group-title">Key Deliverables</h6>
+                <ul className="spec-list">
+                  {(project.features || project.deliverables || project.highlights).slice(0, 3).map((feat, idx) => (
+                    <li key={idx} className="spec-list-item">
+                      <CheckCircle2 size={13} className="spec-check" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Deployed Tech Stack / Architecture (Safely guarded) */}
+            {(project.technologies || project.techStack || project.tools) && (project.technologies || project.techStack || project.tools).length > 0 && (
+              <div className="back-spec-group">
+                <h6 className="spec-group-title">Architecture &amp; Stack</h6>
+                <div className="spec-tags-wrap">
+                  {(project.technologies || project.techStack || project.tools).slice(0, 4).map((tech, idx) => (
+                    <span key={idx} className="tech-tag-pill">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Clean Single Action Bar */}

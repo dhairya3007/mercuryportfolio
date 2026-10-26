@@ -309,6 +309,38 @@
   overflow: hidden;
 }
 
+/* Dynamic Key Metric Pill on Back Card */
+.back-metric-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--brand-blue-subtle);
+  border: 1px solid var(--brand-blue-border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.65rem;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.back-metric-val {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.back-metric-lbl {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .spec-group-title {
   font-size: 0.65rem;
   font-weight: 700;
