@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Mail, 
@@ -7,10 +7,27 @@ import {
   MessageSquare, 
   ExternalLink, 
   CheckCircle, 
-  ArrowRight
+  ArrowRight,
+  ChevronDown,
+  Check,
+  Globe,
+  Database,
+  Smartphone,
+  Palette,
+  TrendingUp,
+  QrCode
 } from 'lucide-react';
 import { companyDetails } from '../data/portfolioData';
 import './ContactCTA.css';
+
+const serviceOptions = [
+  { value: "Website Development", label: "Website Development", icon: Globe },
+  { value: "Web Applications & CRM", label: "Web Applications & CRM", icon: Database },
+  { value: "Mobile Applications", label: "Mobile Applications", icon: Smartphone },
+  { value: "Branding & Graphic Design", label: "Branding & Graphic Design", icon: Palette },
+  { value: "Digital Marketing & SEO", label: "Digital Marketing & SEO", icon: TrendingUp },
+  { value: "Digital NFC & Dynamic QR Solution", label: "Digital NFC & Dynamic QR Solution", icon: QrCode },
+];
 
 export default function ContactCTA({ prefilledSubject = '' }) {
   const [formData, setFormData] = useState({
@@ -20,6 +37,52 @@ export default function ContactCTA({ prefilledSubject = '' }) {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Sync prefilledSubject from modal CTAs if passed
+  useEffect(() => {
+    if (prefilledSubject) {
+      const matched = serviceOptions.find(opt => 
+        prefilledSubject.toLowerCase().includes(opt.value.toLowerCase()) ||
+        opt.value.toLowerCase().includes(prefilledSubject.toLowerCase())
+      );
+      if (matched) {
+        setFormData(prev => ({ ...prev, service: matched.value }));
+      } else {
+        setFormData(prev => ({ 
+          ...prev, 
+          message: prev.message ? prev.message : `Project Inquiry regarding: ${prefilledSubject}\n\n` 
+        }));
+      }
+    }
+  }, [prefilledSubject]);
+
+  // Click outside and escape key listener to close dropdown
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isDropdownOpen]);
+
+  const selectedOption = serviceOptions.find(opt => opt.value === formData.service) || serviceOptions[0];
+  const SelectedIcon = selectedOption.icon;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -146,19 +209,68 @@ export default function ContactCTA({ prefilledSubject = '' }) {
                     />
                   </div>
 
-                  <div className="form-group">
-                    <label htmlFor="service-select">Required Capability</label>
-                    <select
-                      id="service-select"
-                      value={formData.service}
-                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    >
-                      <option value="Website Development">Website Development</option>
-                      <option value="Web Applications & CRM">Web Applications &amp; CRM</option>
-                      <option value="Mobile Applications">Mobile Applications</option>
-                      <option value="Branding & Graphic Design">Branding &amp; Graphic Design</option>
-                      <option value="Digital NFC & Dynamic QR Solution">Digital NFC &amp; Dynamic QR Solution</option>
-                    </select>
+                  {/* Responsive Custom Capability Dropdown */}
+                  <div className="form-group custom-select-group" ref={dropdownRef}>
+                    <label id="service-select-label" htmlFor="custom-service-trigger">Required Capability</label>
+                    <div className="custom-dropdown-container">
+                      <button
+                        id="custom-service-trigger"
+                        type="button"
+                        className={`custom-select-trigger ${isDropdownOpen ? 'active' : ''}`}
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        aria-haspopup="listbox"
+                        aria-expanded={isDropdownOpen}
+                        aria-labelledby="service-select-label"
+                      >
+                        <div className="select-trigger-content">
+                          {SelectedIcon && <SelectedIcon size={16} className="select-trigger-icon" />}
+                          <span className="select-trigger-text">{formData.service}</span>
+                        </div>
+                        <ChevronDown size={16} className={`select-chevron-icon ${isDropdownOpen ? 'open' : ''}`} />
+                      </button>
+
+                      {/* Dropdown Options Popup */}
+                      {isDropdownOpen && (
+                        <div 
+                          className="custom-select-menu" 
+                          role="listbox"
+                          aria-labelledby="service-select-label"
+                        >
+                          <div className="custom-select-scroller">
+                            {serviceOptions.map((opt) => {
+                              const Icon = opt.icon;
+                              const isSelected = formData.service === opt.value;
+                              return (
+                                <button
+                                  key={opt.value}
+                                  type="button"
+                                  role="option"
+                                  aria-selected={isSelected}
+                                  className={`custom-select-option ${isSelected ? 'selected' : ''}`}
+                                  onClick={() => {
+                                    setFormData({ ...formData, service: opt.value });
+                                    setIsDropdownOpen(false);
+                                  }}
+                                >
+                                  <div className="option-label-wrap">
+                                    {Icon && <Icon size={15} className="option-icon" />}
+                                    <span className="option-text">{opt.label}</span>
+                                  </div>
+                                  {isSelected && <Check size={15} className="option-check-icon" />}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Hidden accessible fallback input for browser serialization */}
+                    <input 
+                      type="hidden" 
+                      name="service" 
+                      value={formData.service} 
+                    />
                   </div>
 
                   <div className="form-group">

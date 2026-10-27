@@ -90,13 +90,14 @@
 .card-front {
   background: #FFFFFF;
   z-index: 2;
-  transform: rotateY(0deg);
+  transform: rotateY(0deg) translateZ(1px);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   box-shadow: var(--shadow-card);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  transform-style: preserve-3d;
 }
 
 /* Subtle holographic light sweep reflection on hover */
@@ -108,7 +109,7 @@
   transform: translateX(-100%);
   transition: transform 0.8s ease;
   pointer-events: none;
-  z-index: 10;
+  z-index: 2;
 }
 
 .digital-card-wrapper:hover .card-front::after {
@@ -128,7 +129,9 @@
   text-align: center;
   width: 100%;
   position: relative;
-  z-index: 2;
+  z-index: 5;
+  transform: translateZ(10px);
+  transform-style: preserve-3d;
 }
 
 .front-logo-stage {
@@ -139,6 +142,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  transform: translateZ(15px);
 }
 
 .logo-glow-halo {
@@ -146,8 +150,7 @@
   width: 160px;
   height: 54px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(19, 88, 193, 0.08) 0%, transparent 70%);
-  filter: blur(8px);
+  background: radial-gradient(ellipse at center, rgba(19, 88, 193, 0.08) 0%, rgba(19, 88, 193, 0) 70%);
   pointer-events: none;
 }
 
@@ -159,11 +162,12 @@
   object-fit: contain;
   display: block;
   transition: transform var(--transition-normal);
-  z-index: 1;
+  z-index: 10;
+  transform: translateZ(20px);
 }
 
 .digital-card-wrapper:hover .front-logo-img {
-  transform: scale(1.06);
+  transform: scale(1.06) translateZ(20px);
 }
 
 .front-client-name {
@@ -300,11 +304,11 @@
 }
 
 .back-overview-para {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: var(--text-secondary);
-  line-height: 1.45;
+  line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -413,6 +417,13 @@
   gap: 0.45rem;
 }
 
+.back-actions-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
 .back-icon-link {
   width: 36px;
   height: 36px;
@@ -433,6 +444,20 @@
   border-color: var(--brand-blue);
   color: var(--brand-blue-hover);
   transform: translateY(-2px);
+}
+
+.back-icon-link.instagram-link:hover {
+  color: #E1306C;
+  border-color: rgba(225, 48, 108, 0.4);
+  background: rgba(225, 48, 108, 0.08);
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.15);
+}
+
+.back-icon-link.facebook-link:hover {
+  color: #1877F2;
+  border-color: rgba(24, 119, 242, 0.4);
+  background: rgba(24, 119, 242, 0.08);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.15);
 }
 
 /* Responsive enhancements for small screens */

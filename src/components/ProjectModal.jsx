@@ -26,6 +26,37 @@ import {
 } from 'lucide-react';
 import './ProjectModal.css';
 
+const InstagramIcon = ({ size = 15 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const FacebookIcon = ({ size = 15 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+/**
+ * Safely resolves client logo paths, handles spaces and shorthand filenames
+ */
+const resolveLogoPath = (path) => {
+  if (!path) return '/assets/logo.png';
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+    return path;
+  }
+  let clean = path.replace(/^\/?public\//, '/');
+  if (!clean.includes('/')) {
+    clean = `/assets/clients/${clean}`;
+  } else if (!clean.startsWith('/')) {
+    clean = `/${clean}`;
+  }
+  return encodeURI(clean);
+};
+
 /**
  * Returns an icon component based on the icon name or metadata label keyword
  */
@@ -196,6 +227,9 @@ export default function ProjectModal({ project, isOpen, onClose, onDiscussProjec
   const liveUrl = project.liveUrl || project.link || project.demoUrl;
   const liveUrlText = project.liveUrlText || 'Official Link';
 
+  const instagramUrl = project.socials?.instagram || project.socialLinks?.instagram || project.instagramUrl || project.instagram;
+  const facebookUrl = project.socials?.facebook || project.socialLinks?.facebook || project.facebookUrl || project.facebook;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -229,9 +263,15 @@ export default function ProjectModal({ project, isOpen, onClose, onDiscussProjec
                 {project.clientLogo && (
                   <div className="modal-logo-box">
                     <img 
-                      src={project.clientLogo} 
+                      src={resolveLogoPath(project.clientLogo)} 
                       alt={`${project.clientName || 'Client'} logo`} 
                       className="modal-client-logo"
+                      onError={(e) => {
+                        if (!e.target.dataset.fallback) {
+                          e.target.dataset.fallback = 'true';
+                          e.target.src = '/assets/logo.png';
+                        }
+                      }}
                     />
                   </div>
                 )}
@@ -244,6 +284,32 @@ export default function ProjectModal({ project, isOpen, onClose, onDiscussProjec
               </div>
 
               <div className="modal-actions-top">
+                {instagramUrl && (
+                  <a 
+                    href={instagramUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="modal-social-btn instagram-btn"
+                    title={`${project.clientName} Instagram`}
+                    aria-label={`${project.clientName} Instagram`}
+                  >
+                    <InstagramIcon size={15} />
+                    <span className="social-btn-label">Instagram</span>
+                  </a>
+                )}
+                {facebookUrl && (
+                  <a 
+                    href={facebookUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="modal-social-btn facebook-btn"
+                    title={`${project.clientName} Facebook`}
+                    aria-label={`${project.clientName} Facebook`}
+                  >
+                    <FacebookIcon size={15} />
+                    <span className="social-btn-label">Facebook</span>
+                  </a>
+                )}
                 {liveUrl && (
                   <a 
                     href={liveUrl} 
@@ -453,6 +519,51 @@ export default function ProjectModal({ project, isOpen, onClose, onDiscussProjec
                             {tech}
                           </span>
                         ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Official Social Channels Card if provided */}
+                  {(instagramUrl || facebookUrl) && (
+                    <div className="meta-card">
+                      <h5 className="meta-card-title">Campaign &amp; Social Channels</h5>
+                      <div className="modal-channels-list">
+                        {instagramUrl && (
+                          <a 
+                            href={instagramUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="modal-channel-link instagram-channel"
+                            title={`${project.clientName} Instagram`}
+                          >
+                            <div className="channel-icon-pill">
+                              <InstagramIcon size={16} />
+                            </div>
+                            <div className="channel-text">
+                              <span className="channel-title">Instagram</span>
+                              <span className="channel-sub">Official Profile &amp; Reels</span>
+                            </div>
+                            <ExternalLink size={13} className="channel-external-icon" />
+                          </a>
+                        )}
+                        {facebookUrl && (
+                          <a 
+                            href={facebookUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="modal-channel-link facebook-channel"
+                            title={`${project.clientName} Facebook`}
+                          >
+                            <div className="channel-icon-pill">
+                              <FacebookIcon size={16} />
+                            </div>
+                            <div className="channel-text">
+                              <span className="channel-title">Facebook</span>
+                              <span className="channel-sub">Official Page &amp; Feed</span>
+                            </div>
+                            <ExternalLink size={13} className="channel-external-icon" />
+                          </a>
+                        )}
                       </div>
                     </div>
                   )}

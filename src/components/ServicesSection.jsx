@@ -5,6 +5,7 @@ import {
   Database, 
   Smartphone, 
   Palette, 
+  TrendingUp,
   ArrowRight
 } from 'lucide-react';
 import { companyDetails } from '../data/portfolioData';
@@ -14,14 +15,16 @@ const iconMap = {
   Globe: Globe,
   Database: Database,
   Smartphone: Smartphone,
-  Palette: Palette
+  Palette: Palette,
+  TrendingUp: TrendingUp
 };
 
 const servicePills = {
   'web-dev': ['Next.js / React', 'Core Web Vitals', 'Responsive UI'],
   'crm-apps': ['Custom Workflows', 'Encrypted Intake', 'Cloud Telematics'],
   'mobile-apps': ['Cross-Platform', 'Web NFC & QR', 'Progressive Web Apps'],
-  'branding': ['Brand Architecture', 'Vector Systems', 'UI/UX Prototypes']
+  'branding': ['Brand Architecture', 'Vector Systems', 'UI/UX Prototypes'],
+  'digital-marketing': ['PPC Search Ads', 'Social Media Growth', 'Local SEO & B2B']
 };
 
 export default function ServicesSection({ onFilterCategory }) {

@@ -10,11 +10,49 @@ import {
 } from 'lucide-react';
 import './ClientCard.css';
 
+const InstagramIcon = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const FacebookIcon = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+/**
+ * Safely resolves client logo paths across environments, handling spaces (e.g. 'HVC logo.png'),
+ * subpaths, BASE_URL, and accidental 'public/' prefixes.
+ */
+const resolveLogoPath = (path) => {
+  if (!path) return '/assets/logo.png';
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+    return path;
+  }
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  let cleanPath = path.replace(/^\/?public\//, '');
+  if (cleanPath.startsWith('/')) {
+    cleanPath = cleanPath.slice(1);
+  }
+  if (!cleanPath.includes('/')) {
+    cleanPath = `assets/clients/${cleanPath}`;
+  }
+  return encodeURI(`${cleanBase}${cleanPath}`);
+};
+
 export default function ClientCard({ project, onOpenModal, index }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const instagramUrl = project.socials?.instagram || project.socialLinks?.instagram || project.instagramUrl || project.instagram;
+  const facebookUrl = project.socials?.facebook || project.socialLinks?.facebook || project.facebookUrl || project.facebook;
 
   // Escape key & Click-outside listener to collapse back when flipped
   useEffect(() => {
@@ -121,12 +159,18 @@ export default function ClientCard({ project, onOpenModal, index }) {
             <div className="front-logo-stage">
               <div className="logo-glow-halo" />
               <img 
-                src={project.clientLogo} 
+                src={resolveLogoPath(project.clientLogo)} 
                 alt={`${project.clientName} logo`} 
                 className="front-logo-img" 
                 width="190"
                 height="48"
                 loading="eager"
+                onError={(e) => {
+                  if (!e.target.dataset.fallback) {
+                    e.target.dataset.fallback = 'true';
+                    e.target.src = '/assets/logo.png';
+                  }
+                }}
               />
             </div>
             
@@ -146,10 +190,16 @@ export default function ClientCard({ project, onOpenModal, index }) {
           <div className="back-header-row">
             <div className="back-brand-info">
               <img 
-                src={project.clientLogo} 
+                src={resolveLogoPath(project.clientLogo)} 
                 alt={`${project.clientName} logo`} 
                 className="back-logo-img" 
                 loading="lazy"
+                onError={(e) => {
+                  if (!e.target.dataset.fallback) {
+                    e.target.dataset.fallback = 'true';
+                    e.target.src = '/assets/logo.png';
+                  }
+                }}
               />
               <div className="back-title-wrap">
                 <h4 className="back-client-title">{project.clientName}</h4>
@@ -230,18 +280,49 @@ export default function ClientCard({ project, onOpenModal, index }) {
               <ArrowUpRight size={14} />
             </button>
 
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="back-icon-link"
-                onClick={(e) => e.stopPropagation()}
-                title="View live website"
-              >
-                <ExternalLink size={14} />
-              </a>
-            )}
+            <div className="back-actions-cluster">
+              {instagramUrl && (
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="back-icon-link instagram-link"
+                  onClick={(e) => e.stopPropagation()}
+                  title={`${project.clientName} on Instagram`}
+                  aria-label={`${project.clientName} on Instagram`}
+                >
+                  <InstagramIcon size={14} />
+                </a>
+              )}
+
+              {facebookUrl && (
+                <a
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="back-icon-link facebook-link"
+                  onClick={(e) => e.stopPropagation()}
+                  title={`${project.clientName} on Facebook`}
+                  aria-label={`${project.clientName} on Facebook`}
+                >
+                  <FacebookIcon size={14} />
+                </a>
+              )}
+
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="back-icon-link"
+                  onClick={(e) => e.stopPropagation()}
+                  title="View live website"
+                  aria-label="View live website"
+                >
+                  <ExternalLink size={14} />
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
